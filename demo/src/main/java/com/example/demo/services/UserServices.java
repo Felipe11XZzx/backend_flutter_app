@@ -22,6 +22,10 @@ public class UserServices {
         return userRepository.save(mapToUser(userCreationRequest));
     }
 
+    public User updateUser(User user){
+        return userRepository.save(user);
+    }
+
     /*
      *  public void removeUser(Long id){
         userRepository.deleteById(id);
