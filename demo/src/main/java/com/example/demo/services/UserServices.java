@@ -26,12 +26,6 @@ public class UserServices {
         return userRepository.save(user);
     }
 
-    /*
-     *  public void removeUser(Long id){
-        userRepository.deleteById(id);
-        }
-     */
-
     public boolean removeUser(Long id){
         try {
             userRepository.deleteById(id);
@@ -61,6 +55,8 @@ public class UserServices {
         user.setContrasena(userCreationRequest.contrasena());
         user.setEdad(userCreationRequest.edad());
         user.setAdministrador(userCreationRequest.administrador());
+        user.setBloqueado(userCreationRequest.bloqueado());
+        user.setLugarNacimiento(userCreationRequest.lugarNacimiento());
         return user;
     }
 }

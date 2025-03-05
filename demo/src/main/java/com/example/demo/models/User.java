@@ -21,6 +21,12 @@ public class User {
     @Column(name = "administador")
     private boolean administrador;
 
+    @Column(name = "bloqueado")
+    private boolean bloqueado;
+
+    @Column(name = "lugarNacimiento")
+    private String lugarNacimiento;
+
     public User() {
     }
 
@@ -62,6 +68,22 @@ public class User {
 
     public void setAdministrador(boolean administrador) {
         this.administrador = administrador;
+    }
+
+    public boolean isBloqueado() {
+        return bloqueado;
+    }
+
+    public void setBloqueado(boolean bloqueado) {
+        this.bloqueado = bloqueado;
+    }
+
+    public String getLugarNacimiento() {
+        return lugarNacimiento;
+    }
+
+    public void setLugarNacimiento(String lugarNacimiento) {
+        this.lugarNacimiento = lugarNacimiento;
     }
 
     @Override
@@ -106,5 +128,4 @@ public class User {
             return false;
         return true;
     }
-    
 }
