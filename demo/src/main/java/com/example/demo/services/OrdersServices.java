@@ -22,17 +22,22 @@ public class OrdersServices {
     public void removeOrder(Long id){
         orderRepository.deleteById(id);
     }
+
+    public Orders updateOrder(Orders order){
+        return orderRepository.save(order);
+    }
     
     public Optional<Orders> getOrder(final long id){
         return orderRepository.findById(id);
     }
+
     public List<Orders> getAllOrders(){
         return orderRepository.findAll();
     }
 
     public Orders maptoOrders(OrdersCreationRequest ordersCreationRequest){
         Orders order = new Orders();
-        order.setNumeroOrden(ordersCreationRequest.numeroOrden());
+        order.setNumeroPedido(ordersCreationRequest.numeroPedido());
         order.setDescripcion(ordersCreationRequest.descripcion());
         order.setPrecio(ordersCreationRequest.precio());
         order.setEstado(ordersCreationRequest.estado());

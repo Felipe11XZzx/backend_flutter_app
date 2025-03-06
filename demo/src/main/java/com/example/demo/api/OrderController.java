@@ -5,34 +5,39 @@ import com.example.demo.models.Orders;
 import com.example.demo.models.requests.OrdersCreationRequest;
 import com.example.demo.services.OrdersServices;
     
-    @RestController
-    @RequestMapping("api/v1/orders")
-    @CrossOrigin(origins = "*")
-    public class OrderController {
+@RestController
+@RequestMapping("/orders")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+public class OrderController {
 
-        private final OrdersServices orderService;
+    private final OrdersServices orderService;
 
-        public OrderController(OrdersServices ordersService){
-            this.orderService = ordersService;
-        }
+    public OrderController(OrdersServices ordersService){
+        this.orderService = ordersService;
+    }
 
-        @PostMapping
-        public Orders createOrder(@RequestBody OrdersCreationRequest ordersCreationRequest){
-            return orderService.createOrder(ordersCreationRequest);
-        }
+    @GetMapping
+    public List<Orders> getAllOrders(){
+        return orderService.getAllOrders();
+    }
 
-        @DeleteMapping
-        public void remoceOrder(@PathVariable Long id){
-            orderService.removeOrder(id);
-        }
+    @PostMapping
+    public Orders createOrder(@RequestBody OrdersCreationRequest ordersCreationRequest){
+        return orderService.createOrder(ordersCreationRequest);
+    }
 
-        @GetMapping("/{id}")
-        public Orders getOrder(@PathVariable long id){
-            return orderService.getOrder(id).orElse(null);
-        }
+    @GetMapping("/{id}")
+    public Orders getOrder(@PathVariable long id){
+        return orderService.getOrder(id).orElse(null);
+    }
 
-        @GetMapping
-        public List<Orders> getAllOrders(){
-            return orderService.getAllOrders();
-        }
+    @PutMapping("/{id}")
+    public Orders updateOrder(@PathVariable long id, @RequestBody Orders order){
+        return orderService.updateOrder(order);
+    }
+
+    @DeleteMapping("/{id}")
+    public void removeOrder(@PathVariable Long id){
+        orderService.removeOrder(id);
+    }
 }
