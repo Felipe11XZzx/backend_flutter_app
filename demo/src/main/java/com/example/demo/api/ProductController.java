@@ -21,13 +21,18 @@ public class ProductController {
         return productService.createProduct(productCreationRequest);
     }
 
-    @DeleteMapping
-    public void removeProduct(@PathVariable Long id){
+    @PutMapping("/{id}")
+    public Product updateProduct(@PathVariable Long id, @RequestBody Product product){
+        return productService.updateProduct(product);
+    }
+
+    @DeleteMapping("/{id}")
+    public void removeProduct(@PathVariable String id){
         productService.removeProduct(id);
     }
 
-    @GetMapping
-    public Product getProduct(@PathVariable Long id){
+    @GetMapping("/{id}")
+    public Product getProduct(@PathVariable String id){
         return productService.getProduct(id).orElse(null);
     }
 

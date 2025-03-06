@@ -1,5 +1,5 @@
 package com.example.demo.models.requests;
 
-public record ProductCreationRequest(Long id, String nombreProducto, String descripcion, Double precio, int stock) {
+public record ProductCreationRequest(String nombre, String descripcion, Double precio, int cantidad, String imagenProducto) {
     
 }

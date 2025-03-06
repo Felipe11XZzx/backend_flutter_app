@@ -9,7 +9,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="nombre")
+    @Column(name="nombreProducto")
     private String nombreProducto;
 
     @Column(name="descripcion")
@@ -19,22 +19,12 @@ public class Product {
     private Double precio;
 
     @Column(name="cantidad")
-    private int stock;
+    private int cantidad;
 
-    @Column(name="imagen_producto")
+    @Column(name="imagenProducto")
     private String imagenProducto;
 
     public Product() {}
-
-    public Product(Long id, String nombreProducto, String descripcion, Double precio, int stock,
-            String imagenProducto) {
-        this.id = id;
-        this.nombreProducto = nombreProducto;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.stock = stock;
-        this.imagenProducto = imagenProducto;
-    }
 
     public Long getId() {
         return id;
@@ -68,12 +58,12 @@ public class Product {
         this.precio = precio;
     }
 
-    public int getStock() {
-        return stock;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public String getImagenProducto() {
@@ -92,7 +82,7 @@ public class Product {
         result = prime * result + ((nombreProducto == null) ? 0 : nombreProducto.hashCode());
         result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
         result = prime * result + ((precio == null) ? 0 : precio.hashCode());
-        result = prime * result + stock;
+        result = prime * result + cantidad;
         result = prime * result + ((imagenProducto == null) ? 0 : imagenProducto.hashCode());
         return result;
     }
@@ -126,7 +116,7 @@ public class Product {
                 return false;
         } else if (!precio.equals(other.precio))
             return false;
-        if (stock != other.stock)
+        if (cantidad!= other.cantidad)
             return false;
         if (imagenProducto == null) {
             if (other.imagenProducto != null)

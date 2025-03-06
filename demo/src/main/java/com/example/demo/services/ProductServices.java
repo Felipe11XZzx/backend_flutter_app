@@ -1,4 +1,6 @@
 package com.example.demo.services;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import com.example.demo.models.requests.ProductCreationRequest;
 import com.example.demo.models.Product;
@@ -8,6 +10,7 @@ import java.util.Optional;
 
 @Service
 public class ProductServices {
+    private static final Logger logger = LoggerFactory.getLogger(ProductServices.class);
     private final ProductRepository productRepository;
 
     public ProductServices(ProductRepository productRepository){
@@ -18,11 +21,20 @@ public class ProductServices {
         return productRepository.save(mapToProduct(prodCreationRequest));
     }
 
-    public void removeProduct(Long id){
+    public Product updateProduct(final Product IDproduct){
+        try {
+            return productRepository.save(IDproduct);
+        } catch (Exception e) {
+            logger.error("Error recuperando el producto con id {}, Exception {}", IDproduct,e);
+        }
+        return null;
+    }
+
+    public void removeProduct(String id){
         productRepository.deleteById(id);
     }
 
-    public Optional<Product> getProduct(final long id){
+    public Optional<Product> getProduct(final String id){
         return productRepository.findById(id);
     }
 
@@ -32,10 +44,11 @@ public class ProductServices {
 
     public Product mapToProduct(ProductCreationRequest prodCreationRequest){
         Product producto = new Product();
-        producto.setNombreProducto(prodCreationRequest.nombreProducto());
+        producto.setNombreProducto(prodCreationRequest.nombre());
         producto.setDescripcion(prodCreationRequest.descripcion());
         producto.setPrecio(prodCreationRequest.precio());
-        producto.setStock(prodCreationRequest.stock());
+        producto.setCantidad(prodCreationRequest.cantidad());
+        producto.setImagenProducto(prodCreationRequest.imagenProducto());
         return producto;
     }
 }

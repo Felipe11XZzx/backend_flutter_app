@@ -1,6 +1,5 @@
 package com.example.demo.models;
 import jakarta.persistence.*;
-//import java.util.Objects;
 
 @Entity
 @Table(name="usuario")
@@ -16,15 +15,15 @@ public class User {
     private String contrasena;
 
     @Column(name = "edad")
-    private int edad;
+    private Integer edad;
 
-    @Column(name = "administador")
-    private boolean administrador;
+    @Column(name = "administrador")
+    private Boolean administrador = false;
 
     @Column(name = "bloqueado")
-    private boolean bloqueado;
+    private Boolean bloqueado = false;
 
-    @Column(name = "lugarNacimiento")
+    @Column(name = "lugar_nacimiento")
     private String lugarNacimiento;
 
     public User() {
@@ -54,28 +53,28 @@ public class User {
         this.contrasena = contrasena;
     }
 
-    public int getEdad() {
+    public Integer getEdad() {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(Integer edad) {
         this.edad = edad;
     }
 
-    public boolean isAdministrador() {
-        return administrador;
+    public Boolean getAdministrador() {
+        return administrador != null ? administrador : false;
     }
 
-    public void setAdministrador(boolean administrador) {
-        this.administrador = administrador;
+    public void setAdministrador(Boolean administrador) {
+        this.administrador = administrador != null ? administrador : false;
     }
 
-    public boolean isBloqueado() {
-        return bloqueado;
+    public Boolean getBloqueado() {
+        return bloqueado != null ? bloqueado : false;
     }
 
-    public void setBloqueado(boolean bloqueado) {
-        this.bloqueado = bloqueado;
+    public void setBloqueado(Boolean bloqueado) {
+        this.bloqueado = bloqueado != null ? bloqueado : false;
     }
 
     public String getLugarNacimiento() {
@@ -93,8 +92,8 @@ public class User {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
         result = prime * result + ((contrasena == null) ? 0 : contrasena.hashCode());
-        result = prime * result + edad;
-        result = prime * result + (administrador ? 1231 : 1237);
+        result = prime * result + ((edad == null) ? 0 : edad.hashCode());
+        result = prime * result + ((administrador == null) ? 0 : administrador.hashCode());
         return result;
     }
 
@@ -122,9 +121,15 @@ public class User {
                 return false;
         } else if (!contrasena.equals(other.contrasena))
             return false;
-        if (edad != other.edad)
+        if (edad == null) {
+            if (other.edad != null)
+                return false;
+        } else if (!edad.equals(other.edad))
             return false;
-        if (administrador != other.administrador)
+        if (administrador == null) {
+            if (other.administrador != null)
+                return false;
+        } else if (!administrador.equals(other.administrador))
             return false;
         return true;
     }
