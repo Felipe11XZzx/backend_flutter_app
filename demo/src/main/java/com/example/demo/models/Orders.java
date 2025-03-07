@@ -10,7 +10,7 @@ public class Orders {
     private Long id;
 
     @Column(name="numeroPedido")
-    private int numeroPedido;
+    private Integer numeroPedido;
 
     @Column(name="descripcion")
     private String descripcion;
@@ -24,7 +24,7 @@ public class Orders {
     @Column(name="comprador")
     private String comprador;
 
-    @Column(name="detalleProductos")
+    @Column(name="detalleProductos", columnDefinition="TEXT")
     private String detalleProductos;
 
     public Long getId() {
@@ -38,7 +38,7 @@ public class Orders {
         this.id = id;
     }
 
-    public int getNumeroPedido() {
+    public Integer getNumeroPedido() {
         return numeroPedido;
     }
 
@@ -91,7 +91,7 @@ public class Orders {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + numeroPedido;
+        result = prime * result + ((numeroPedido == null) ? 0 : numeroPedido.hashCode());
         result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
         result = prime * result + ((precio == null) ? 0 : precio.hashCode());
         result = prime * result + ((estado == null) ? 0 : estado.hashCode());
@@ -108,7 +108,9 @@ public class Orders {
         if (id == null) {
             if (other.id != null) return false;
         } else if (!id.equals(other.id)) return false;
-        if (numeroPedido != other.numeroPedido) return false;
+        if (numeroPedido == null) {
+            if (other.numeroPedido != null) return false;
+        } else if (!numeroPedido.equals(other.numeroPedido)) return false;
         if (descripcion == null) {
             if (other.descripcion != null) return false;
         } else if (!descripcion.equals(other.descripcion)) return false;

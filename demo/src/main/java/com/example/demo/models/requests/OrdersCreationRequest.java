@@ -1,7 +1,7 @@
 package com.example.demo.models.requests;
 
 public record OrdersCreationRequest(
-    int numeroPedido,
+    Integer numeroPedido,
     String descripcion,
     Double precio,
     String estado,
