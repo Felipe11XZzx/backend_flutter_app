@@ -1,4 +1,6 @@
 package com.example.demo.models;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -25,6 +27,10 @@ public class User {
 
     @Column(name = "lugar_nacimiento")
     private String lugarNacimiento;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id")
+    private List<Orders> ordenes; 
 
     public User() {
     }
